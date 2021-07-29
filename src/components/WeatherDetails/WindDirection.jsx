@@ -1,4 +1,4 @@
-import DirectionImage from '../assets/direction.svg';
+import DirectionImage from '../../assets/direction.svg';
 
 const WindDirection = ({ compass, degrees }) => (
   <div className="flex items-center justify-center gap-2 font-semibold">

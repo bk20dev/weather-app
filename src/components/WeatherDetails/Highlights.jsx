@@ -1,5 +1,5 @@
-import ProgressBar from '../ProgressBar';
-import WindDirection from '../WindDirection';
+import ProgressBar from './ProgressBar';
+import WindDirection from './WindDirection';
 import HighlightsCard from './HighlightsCard';
 
 const Highlights = () => (
