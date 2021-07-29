@@ -5,7 +5,7 @@ const HighlightsCard = ({ name, value, unit, children }) => (
       <span className="text-6xl">{value}</span>
       {unit}
     </p>
-    {children}
+    <div className="w-full max-w-xs mx-auto">{children}</div>
   </div>
 );
 
