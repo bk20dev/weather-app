@@ -12,7 +12,7 @@ const RoundedButton = ({ active, children }) => {
 };
 
 const UnitsToggle = ({ current }) => (
-  <header className="flex justify-end gap-3 py-10">
+  <header className="flex justify-center xl:justify-end gap-3 py-10">
     <RoundedButton active={current === 'C'}>°C</RoundedButton>
     <RoundedButton active={current === 'F'}>°F</RoundedButton>
   </header>
