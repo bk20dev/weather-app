@@ -1,5 +1,6 @@
 import LocationIcon from '../assets/location.svg';
 import PinIcon from '../assets/pin.svg';
+import convertTemp from '../utils/convertTemp';
 import formatDate from '../utils/formatDate';
 import getIconPath from '../utils/getIconPath';
 import getRelativeDate from '../utils/getRelativeDate';
@@ -34,7 +35,7 @@ const WeatherSummary = ({
         <img src={getIconPath(abbr)} alt="" className="h-56 object-contain" />
         <div>
           <span className="text-9xl font-semibold">
-            {Math.round(temperature)}
+            {Math.round(convertTemp(temperature, unit))}
           </span>
           <span className="text-5xl font-semibold text-gray-400">°{unit}</span>
         </div>
