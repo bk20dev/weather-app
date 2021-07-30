@@ -1,7 +1,7 @@
 import getIconPath from '../../utils/getIconPath';
 
 const DailyForecast = ({ date, abbr, unit, min, max }) => (
-  <div className="flex flex-col gap-6 bg-gray-800 text-gray-200 text-center font-semibold p-6 w-full">
+  <div className="flex flex-col gap-6 bg-gray-800 text-gray-200 text-center font-semibold p-6 min-w-max">
     <p>{date}</p>
     <img src={getIconPath(abbr)} alt="" className="h-16 object-contain" />
     <div>

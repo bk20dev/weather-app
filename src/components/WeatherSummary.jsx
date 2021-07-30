@@ -14,7 +14,7 @@ const WeatherSummary = ({
   onSearchClicked,
   onLocationClicked,
 }) => {
-  const relativeDate = getRelativeDate(new Date(), date);
+  const relativeDate = getRelativeDate(date);
   const relativeDateText = relativeDate ? `${relativeDate} · ` : '';
 
   return (

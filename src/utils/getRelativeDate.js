@@ -2,7 +2,7 @@ import isDayTheSame from './isDayTheSame';
 
 const day = 86400000;
 
-const getRelativeDate = (current, to) => {
+const getRelativeDate = (to, current = new Date()) => {
   current = current.getTime();
   to = to.getTime();
 
