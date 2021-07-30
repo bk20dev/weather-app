@@ -14,7 +14,7 @@ const WeatherSummary = ({
   onSearchClicked,
   onLocationClicked,
 }) => {
-  const relativeDate = getRelativeDate(new Date(), date);
+  const relativeDate = getRelativeDate(date);
   const relativeDateText = relativeDate ? `${relativeDate} · ` : '';
 
   return (
@@ -33,7 +33,9 @@ const WeatherSummary = ({
       <div className="flex-grow flex flex-col gap-20 text-center">
         <img src={getIconPath(abbr)} alt="" className="h-56 object-contain" />
         <div>
-          <span className="text-9xl font-semibold">{temperature}</span>
+          <span className="text-9xl font-semibold">
+            {Math.round(temperature)}
+          </span>
           <span className="text-5xl font-semibold text-gray-400">°{unit}</span>
         </div>
         <p className="text-4xl font-semibold text-gray-400">{name}</p>

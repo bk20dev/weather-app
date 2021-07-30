@@ -1,8 +1,8 @@
+import isDayTheSame from './isDayTheSame';
+
 const day = 86400000;
 
-const isDayTheSame = (a, b) => Math.floor(a / day) === Math.floor(b / day);
-
-const getRelativeDate = (current, to) => {
+const getRelativeDate = (to, current = new Date()) => {
   current = current.getTime();
   to = to.getTime();
 
