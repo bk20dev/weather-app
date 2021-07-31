@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import fetchWeather from '../../actions/fetchWeather';
 import CloseIcon from '../../assets/close.svg';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 
-const Search = () => {
+const Search = ({ fetchWeather }) => {
   const [place, setPlace] = useState('');
   const [results, setResults] = useState([]);
 
@@ -30,10 +32,10 @@ const Search = () => {
       />
       <SearchBar onSearch={setPlace} />
       <div className="mt-14">
-        <SearchResults results={results} onSelect={console.log} />
+        <SearchResults results={results} onSelect={fetchWeather} />
       </div>
     </div>
   );
 };
 
-export default Search;
+export default connect(null, { fetchWeather })(Search);

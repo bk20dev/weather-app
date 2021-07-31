@@ -5,9 +5,7 @@ const SearchResult = ({ title, onClick }) => (
     className="group flex items-center justify-between border border-transparent hover:border-gray-500 cursor-pointer py-6 px-3"
     onClick={onClick}
   >
-    <p key={title} className="font-semibold">
-      {title}
-    </p>
+    <p className="font-semibold">{title}</p>
     <img
       src={ArrowRightIcon}
       alt=""
