@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import clearWeather from '../actions/clearWeather';
 import fetchLocation from '../actions/fetchLocation';
 import fetchWeather from '../actions/fetchWeather';
 import Loading from './Loading';
@@ -8,7 +9,14 @@ import Search from './Search/Search';
 import WeatherDetails from './WeatherDetails/WeatherDetails';
 import WeatherSummary from './WeatherSummary';
 
-const App = ({ fetchLocation, location, fetchWeather, weather, unit }) => {
+const App = ({
+  fetchLocation,
+  location,
+  fetchWeather,
+  weather,
+  unit,
+  clearWeather,
+}) => {
   const [searchVisible, setSearchVisible] = useState(false);
 
   useEffect(() => {
@@ -19,7 +27,7 @@ const App = ({ fetchLocation, location, fetchWeather, weather, unit }) => {
     if (!location) return;
     if (!location.allowed) return fetchWeather(523920);
 
-    const getLocation = async () => {
+    const getWoeid = async () => {
       const { latitude, longitude } = location;
       const place = `${latitude},${longitude}`;
 
@@ -31,7 +39,7 @@ const App = ({ fetchLocation, location, fetchWeather, weather, unit }) => {
       fetchWeather(data[0].woeid);
     };
 
-    getLocation();
+    getWoeid();
   }, [location, fetchWeather]);
 
   if (!location || !weather.loaded) return <Loading />;
@@ -48,13 +56,17 @@ const App = ({ fetchLocation, location, fetchWeather, weather, unit }) => {
 
           return (
             <WeatherSummary
-              temperature={today.the_temp}
+              temperature={today?.the_temp ?? 'nd'}
               unit={unit}
-              name={today.weather_state_name}
-              abbr={today.weather_state_abbr}
-              date={new Date(today.applicable_date)}
+              name={today?.weather_state_name ?? 'no data'}
+              abbr={today?.weather_state_abbr ?? 'c'}
+              date={today ? new Date(today.applicable_date) : new Date()}
               location={location}
               onSearchClicked={() => setSearchVisible(true)}
+              onLocationClicked={() => {
+                clearWeather();
+                fetchLocation();
+              }}
             />
           );
         })()}
@@ -73,4 +85,8 @@ const App = ({ fetchLocation, location, fetchWeather, weather, unit }) => {
 
 const mapStateToProps = (state) => _.pick(state, 'location', 'weather', 'unit');
 
-export default connect(mapStateToProps, { fetchLocation, fetchWeather })(App);
+export default connect(mapStateToProps, {
+  fetchLocation,
+  fetchWeather,
+  clearWeather,
+})(App);

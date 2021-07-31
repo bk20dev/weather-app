@@ -35,7 +35,10 @@ const WeatherSummary = ({
         <img src={getIconPath(abbr)} alt="" className="h-56 object-contain" />
         <div>
           <span className="text-9xl font-semibold">
-            {Math.round(convertTemp(temperature, unit))}
+            {
+              // prettier-ignore
+              temperature === 'nd' ? 'nd' : Math.round(convertTemp(temperature, unit))
+            }
           </span>
           <span className="text-5xl font-semibold text-gray-400">°{unit}</span>
         </div>
