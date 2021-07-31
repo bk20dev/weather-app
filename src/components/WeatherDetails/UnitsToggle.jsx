@@ -4,7 +4,7 @@ const RoundedButton = ({ active, children, onClick }) => {
 
   return (
     <div
-      className={`w-10 h-10 rounded-full text-center leading-10 font-bold text-lg ${style}`}
+      className={`w-10 h-10 rounded-full text-center leading-10 font-bold text-lg ${style} cursor-pointer`}
       onClick={onClick}
     >
       {children}
@@ -14,8 +14,12 @@ const RoundedButton = ({ active, children, onClick }) => {
 
 const UnitsToggle = ({ current, onSelect }) => (
   <header className="flex justify-center xl:justify-end gap-3 py-10">
-    <RoundedButton onClick={() => onSelect('C')} active={current === 'C'}>°C</RoundedButton>
-    <RoundedButton onClick={() => onSelect('F')} active={current === 'F'}>°F</RoundedButton>
+    <RoundedButton onClick={() => onSelect('C')} active={current === 'C'}>
+      °C
+    </RoundedButton>
+    <RoundedButton onClick={() => onSelect('F')} active={current === 'F'}>
+      °F
+    </RoundedButton>
   </header>
 );
 

@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { BounceLoader } from 'react-spinners';
 import clearWeather from '../actions/clearWeather';
 import fetchLocation from '../actions/fetchLocation';
 import fetchWeather from '../actions/fetchWeather';
-import Loading from './Loading';
 import Search from './Search/Search';
 import WeatherDetails from './WeatherDetails/WeatherDetails';
 import WeatherSummary from './WeatherSummary';
@@ -25,7 +25,7 @@ const App = ({
 
   useEffect(() => {
     if (!location) return;
-    if (!location.allowed) return fetchWeather(523920);
+    if (!location.allowed) return fetchWeather(44418);
 
     const getWoeid = async () => {
       const { latitude, longitude } = location;
@@ -42,7 +42,16 @@ const App = ({
     getWoeid();
   }, [location, fetchWeather]);
 
-  if (!location || !weather.loaded) return <Loading />;
+  if (!location || !weather.loaded)
+    return (
+      <div className="absolute top-0 left-0 w-full h-full bg-gray-800">
+        <BounceLoader
+          color="#FF712E"
+          size="4rem"
+          css="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+        />
+      </div>
+    );
 
   return (
     <div
@@ -56,11 +65,11 @@ const App = ({
 
           return (
             <WeatherSummary
-              temperature={today?.the_temp ?? 'nd'}
+              temperature={today?.the_temp}
               unit={unit}
-              name={today?.weather_state_name ?? 'no data'}
-              abbr={today?.weather_state_abbr ?? 'c'}
-              date={today ? new Date(today.applicable_date) : new Date()}
+              name={today?.weather_state_name}
+              abbr={today?.weather_state_abbr}
+              date={today.applicable_date}
               location={location}
               onSearchClicked={() => setSearchVisible(true)}
               onLocationClicked={() => {

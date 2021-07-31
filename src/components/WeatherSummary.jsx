@@ -15,7 +15,7 @@ const WeatherSummary = ({
   onSearchClicked,
   onLocationClicked,
 }) => {
-  const relativeDate = getRelativeDate(date);
+  const relativeDate = getRelativeDate(new Date(date));
   const relativeDateText = relativeDate ? `${relativeDate} · ` : '';
 
   return (
@@ -32,21 +32,24 @@ const WeatherSummary = ({
         </button>
       </div>
       <div className="flex-grow flex flex-col gap-20 text-center">
-        <img src={getIconPath(abbr)} alt="" className="h-56 object-contain" />
+        <img
+          src={getIconPath(abbr ?? 'c')}
+          alt=""
+          className="h-56 object-contain"
+        />
         <div>
           <span className="text-9xl font-semibold">
-            {
-              // prettier-ignore
-              temperature === 'nd' ? 'nd' : Math.round(convertTemp(temperature, unit))
-            }
+            {!temperature ? '-' : Math.round(convertTemp(temperature, unit))}
           </span>
           <span className="text-5xl font-semibold text-gray-400">°{unit}</span>
         </div>
-        <p className="text-4xl font-semibold text-gray-400">{name}</p>
+        <p className="text-4xl font-semibold text-gray-400">
+          {name ?? 'no data'}
+        </p>
         <div className="text-lg text-gray-400">
           <p className="mb-8">
             {relativeDateText}
-            {formatDate(date)}
+            {formatDate(new Date())}
           </p>
           <div className="flex items-center justify-center">
             <img src={PinIcon} alt="Location" className="h-6 opacity-50" />
