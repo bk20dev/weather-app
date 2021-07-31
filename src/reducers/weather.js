@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 };
 
 const weatherReducer = (state = INITIAL_STATE, { type, payload }) => {
+  if (type === 'CLEAR_WEATHER') return INITIAL_STATE;
   if (type !== 'FETCH_WEATHER') return state;
 
   const location = payload.title;

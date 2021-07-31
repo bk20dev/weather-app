@@ -37,12 +37,11 @@ const App = ({ fetchLocation, location, fetchWeather, weather, unit }) => {
   if (!location || !weather.loaded) return <Loading />;
 
   return (
-    <div className="flex flex-col xl:flex-row relative">
-      {searchVisible && (
-        <div className="absolute top-0 left-0 w-full h-full xl:w-116 xl:h-screen xl:overflow-y-auto">
-          <Search onClose={() => setSearchVisible(false)} />
-        </div>
-      )}
+    <div
+      className={`flex flex-col xl:flex-row relative ${
+        searchVisible ? 'overflow-hidden h-screen' : ''
+      }`}
+    >
       <div className="xl:w-116 xl:h-screen xl:overflow-y-auto">
         {(() => {
           const { today, location } = weather;
@@ -63,6 +62,11 @@ const App = ({ fetchLocation, location, fetchWeather, weather, unit }) => {
       <div className="flex-grow xl:h-screen xl:overflow-y-auto">
         <WeatherDetails />
       </div>
+      {searchVisible && (
+        <div className="absolute top-0 left-0 w-full h-full xl:w-116 xl:h-screen xl:overflow-y-auto">
+          <Search onClose={() => setSearchVisible(false)} />
+        </div>
+      )}
     </div>
   );
 };
