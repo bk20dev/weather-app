@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 const Highlights = ({ today }) => (
   <div>
     <p className="text-xl font-bold text-gray-200 mb-8">Today's Highlights</p>
+    {!today && <p className="text-xl font-bold text-gray-500">No data</p>}
     {today && (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <HighlightsCard

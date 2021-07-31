@@ -2,15 +2,19 @@ import _ from 'lodash';
 import isDayTheSame from '../utils/isDayTheSame';
 
 const INITIAL_STATE = {
+  loaded: false,
   location: null,
   week: null,
   today: null,
+  woeid: null,
 };
 
 const weatherReducer = (state = INITIAL_STATE, { type, payload }) => {
+  if (type === 'CLEAR_WEATHER') return INITIAL_STATE;
   if (type !== 'FETCH_WEATHER') return state;
 
   const location = payload.title;
+  const { woeid } = payload;
 
   const week = _.chain(payload.consolidated_weather)
     .map(({ applicable_date, ...rest }) => ({
@@ -24,7 +28,9 @@ const weatherReducer = (state = INITIAL_STATE, { type, payload }) => {
   );
 
   return {
+    loaded: true,
     location,
+    woeid,
     week,
     today,
   };
