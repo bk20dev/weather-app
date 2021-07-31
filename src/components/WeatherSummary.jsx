@@ -13,6 +13,7 @@ const WeatherSummary = ({
   date,
   location,
   onSearchClicked,
+  locationAllowed,
   onLocationClicked,
 }) => {
   const relativeDate = getRelativeDate(new Date(date));
@@ -24,12 +25,14 @@ const WeatherSummary = ({
         <button className="bg-gray-500 px-4 py-2" onClick={onSearchClicked}>
           Search for places
         </button>
-        <button
-          className="bg-gray-500 p-2 rounded-full"
-          onClick={onLocationClicked}
-        >
-          <img src={LocationIcon} alt="Current location" className="h-6" />
-        </button>
+        {locationAllowed && (
+          <button
+            className="bg-gray-500 p-2 rounded-full"
+            onClick={onLocationClicked}
+          >
+            <img src={LocationIcon} alt="Current location" className="h-6" />
+          </button>
+        )}
       </div>
       <div className="flex-grow flex flex-col gap-20 text-center">
         <img

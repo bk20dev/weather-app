@@ -61,7 +61,7 @@ const App = ({
     >
       <div className="xl:w-116 xl:h-screen xl:overflow-y-auto">
         {(() => {
-          const { today, location } = weather;
+          const { today, location: place } = weather;
 
           return (
             <WeatherSummary
@@ -70,12 +70,13 @@ const App = ({
               name={today?.weather_state_name}
               abbr={today?.weather_state_abbr}
               date={today.applicable_date}
-              location={location}
+              location={place}
               onSearchClicked={() => setSearchVisible(true)}
               onLocationClicked={() => {
                 clearWeather();
                 fetchLocation();
               }}
+              locationAllowed={location.allowed}
             />
           );
         })()}

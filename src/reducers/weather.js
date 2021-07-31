@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import isDayTheSame from '../utils/isDayTheSame';
 
 const INITIAL_STATE = {
   loaded: false,
@@ -23,9 +22,7 @@ const weatherReducer = (state = INITIAL_STATE, { type, payload }) => {
     }))
     .value();
 
-  const today = week.find((weather) =>
-    isDayTheSame(Date.now(), weather.applicable_date)
-  );
+  const today = week[0];
 
   return {
     loaded: true,
